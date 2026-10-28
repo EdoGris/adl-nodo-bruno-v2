@@ -1,0 +1,35 @@
+info:
+  name: Obtener reservaciones
+  type: http
+  seq: 1
+
+http:
+  method: GET
+  url: "{{baseURL}}/booking"
+  auth: inherit
+
+runtime:
+  scripts:
+    - type: tests
+      code: |-
+        test("Validar consulta", function() {
+          expect(res.getStatus()).to.equal(200);
+        });
+
+        test("Validación de latencia", function () {
+          expect(res.getResponseTime()).to.be.below(500);
+        });
+
+        test("Validación de tipo de dato", function () {
+          expect(res.getBody()).to.be.an('array');
+        });
+
+        test("Validando headers", function () {
+          expect(res.getHeader('content-type')).to.have.string('application/json');
+        })
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

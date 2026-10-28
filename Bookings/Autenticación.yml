@@ -1,0 +1,31 @@
+info:
+  name: Autenticación
+  type: http
+  seq: 4
+
+http:
+  method: POST
+  url: "{{baseURL}}/auth"
+  body:
+    type: json
+    data: |-
+      {
+          "username" : "admin",
+          "password" : "password123"
+      }
+  auth: inherit
+
+runtime:
+  scripts:
+    - type: after-response
+      code: |-
+        //Garantizo que llegó un token
+        if (res.status === 200 && res.body?.token) {
+          bru.setEnvVar("token", res.body.token);
+        }
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

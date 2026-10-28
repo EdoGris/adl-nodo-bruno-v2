@@ -1,0 +1,31 @@
+info:
+  name: Actualizar reservación
+  type: http
+  seq: 5
+
+http:
+  method: PATCH
+  url: "{{baseURL}}/booking/{{bookingid}}"
+  headers:
+    - name: Accept
+      value: application/json
+    - name: Cookie
+      value: token={{token}}
+  body:
+    type: json
+    data: |-
+      {
+        "additionalneeds": "Breakfast, Lunch And Dinner"
+      }
+
+runtime:
+  assertions:
+    - expression: res.status
+      operator: eq
+      value: "200"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
