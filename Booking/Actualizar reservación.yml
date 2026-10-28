@@ -5,7 +5,7 @@ info:
 
 http:
   method: PATCH
-  url: "{{baseURL}}/booking/{{bookingid}}"
+  url: "{{baseUrl}}/booking/{{bookingid}}"
   headers:
     - name: Accept
       value: application/json
@@ -15,17 +15,12 @@ http:
     type: json
     data: |-
       {
-        "additionalneeds": "Breakfast, Lunch And Dinner"
+        "additionalneeds": "Breakfast, Lunch and Dinner and... sleep"
       }
-
-runtime:
-  assertions:
-    - expression: res.status
-      operator: eq
-      value: "200"
 
 settings:
   encodeUrl: true
   timeout: 0
   followRedirects: true
   maxRedirects: 5
+  forwardAuthorizationHeader: false

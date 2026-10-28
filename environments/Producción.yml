@@ -1,0 +1,5 @@
+name: Producción
+variables:
+  - name: baseUrl
+    value: https://restful-booker.herokuapp.com
+    description: ""

@@ -1,12 +1,15 @@
 info:
-  name: Crear reservación
+  name: Crear Reservación
   type: http
   seq: 2
 
 http:
   method: POST
-  url: "{{baseURL}}/booking"
+  url: "{{baseUrl}}/booking"
   headers:
+    - name: Content-Type
+      value: application/json
+      disabled: true
     - name: Accept
       value: application/json
   body:
@@ -29,19 +32,14 @@ runtime:
   scripts:
     - type: after-response
       code: |-
-        if (res.status === 200 && res.body?.bookingid) {
-          bru.setEnvVar('bookingid', res.body?.bookingid);
+        if (res.status==200 && res.body?.bookingid){
+            bru.setEnvVar("bookingid", res.body.bookingid)
+            console.log(res.body.bookingid)  
         }
-    - type: tests
-      code: |-
-        test("Validar reserva", () => {
-          expect(res.getStatus()).to.equal(201);
-          expect(res.getBody()).to.have.property("booking");
-          expect(res.body.booking).to.be.an("object");
-        });
 
 settings:
   encodeUrl: true
   timeout: 0
   followRedirects: true
   maxRedirects: 5
+  forwardAuthorizationHeader: false

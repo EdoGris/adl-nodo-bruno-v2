@@ -1,11 +1,14 @@
 info:
-  name: Autenticación
+  name: Autenticacion
   type: http
-  seq: 4
+  seq: 1
 
 http:
   method: POST
-  url: "{{baseURL}}/auth"
+  url: "{{baseUrl}}/auth"
+  headers:
+    - name: Content-Type
+      value: application/json
   body:
     type: json
     data: |-
@@ -19,9 +22,9 @@ runtime:
   scripts:
     - type: after-response
       code: |-
-        //Garantizo que llegó un token
-        if (res.status === 200 && res.body?.token) {
-          bru.setEnvVar("token", res.body.token);
+        if(res.status==200 && res.body?.token){
+            bru.setEnvVar("token", res.body.token)
+            console.log(res.body.token)  
         }
 
 settings:
@@ -29,3 +32,4 @@ settings:
   timeout: 0
   followRedirects: true
   maxRedirects: 5
+  forwardAuthorizationHeader: false

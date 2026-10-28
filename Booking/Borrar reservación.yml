@@ -1,0 +1,28 @@
+info:
+  name: Borrar reservación
+  type: http
+  seq: 6
+
+http:
+  method: DELETE
+  url: "{{baseUrl}}/booking/1684"
+  headers:
+    - name: Accept
+      value: application/json
+    - name: Cookie
+      value: token=948598773d033f5
+      disabled: true
+  body:
+    type: json
+    data: |-
+      {
+        "additionalneeds": "Breakfast, Lunch and Dinner"
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false

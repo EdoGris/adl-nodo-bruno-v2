@@ -1,4 +1,5 @@
 name: QA
 variables:
-  - name: baseURL
-    value: https://restful-booker-qa.herokuapp.com/
+  - name: BasebaseUrl
+    value: https://restful-booker.herokuapp.com
+    description: ""

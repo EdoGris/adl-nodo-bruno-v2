@@ -1,0 +1,14 @@
+info:
+  name: Booking
+  type: folder
+  seq: 1
+
+request:
+  headers:
+    - name: Cookie
+      value: token={{token}}
+  auth: inherit
+  variables:
+    - name: baseUrl
+      value: https://restful-booker.herokuapp.com
+      disabled: true
